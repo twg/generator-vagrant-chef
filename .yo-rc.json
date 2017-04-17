@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "David Pellerin",
+      "authorEmail": "david@davidpellerin.com",
+      "authorUrl": ""
+    }
+  }
+}
