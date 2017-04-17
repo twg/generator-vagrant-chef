@@ -30,9 +30,9 @@ Apache-2.0 © [David Pellerin]()
 
 [npm-image]: https://badge.fury.io/js/generator-vagrant-chef.svg
 [npm-url]: https://npmjs.org/package/generator-vagrant-chef
-[travis-image]: https://travis-ci.org//generator-vagrant-chef.svg?branch=master
-[travis-url]: https://travis-ci.org//generator-vagrant-chef
-[daviddm-image]: https://david-dm.org//generator-vagrant-chef.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org//generator-vagrant-chef
-[coveralls-image]: https://coveralls.io/repos//generator-vagrant-chef/badge.svg
-[coveralls-url]: https://coveralls.io/r//generator-vagrant-chef
+[travis-image]: https://travis-ci.org/generator-vagrant-chef.svg?branch=master
+[travis-url]: https://travis-ci.org/generator-vagrant-chef
+[daviddm-image]: https://david-dm.org/generator-vagrant-chef.svg?theme=shields.io
+[daviddm-url]: https://david-dm.org/generator-vagrant-chef
+[coveralls-image]: https://coveralls.io/repos/generator-vagrant-chef/badge.svg
+[coveralls-url]: https://coveralls.io/r/generator-vagrant-chef
