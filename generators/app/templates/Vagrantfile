@@ -1,0 +1,25 @@
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  config.vm.box = "<%= UbuntuVersion %>"
+  config.vm.hostname = "<%= VmHostName %>"
+  config.vm.network :private_network, ip: "<%= VmPrivateIp %>"
+
+  config.vm.provider "virtualbox" do |v|
+    v.memory = <%= VmMemory %>
+    v.cpus = <%= VmCpus %>
+  end
+
+  config.vm.provision :chef_solo do |chef|
+    chef.json = {}
+    chef.run_list = []
+    chef.run_list.push "<%= VmHostName %>::setup-common"
+    <% if (VmSoftware.indexOf('nodejs') !== -1) { %>chef.run_list.push "<%= VmHostName %>::setup-nodejs"<% } %>
+    <% if (VmSoftware.indexOf('postgresql') !== -1) { %>chef.run_list.push "<%= VmHostName %>::setup-postgresql"<% } %>
+    <% if (VmSoftware.indexOf('nginx') !== -1) { %>chef.run_list.push "<%= VmHostName %>::setup-nginx"<% } %>
+    <% if (VmSoftware.indexOf('redis-server') !== -1) { %>chef.run_list.push "<%= VmHostName %>::setup-redis-server"<% } %>
+    <% if (VmSoftware.indexOf('redis-client') !== -1) { %>chef.run_list.push "<%= VmHostName %>::setup-redis-client"<% } %>
+  end
+
+end
