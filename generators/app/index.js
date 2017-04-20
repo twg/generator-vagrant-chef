@@ -80,18 +80,6 @@ module.exports = class extends Generator {
         name: 'postgresql',
         value: 'postgresql',
         checked: true
-      }, {
-        name: 'nginx',
-        value: 'nginx',
-        checked: false
-      }, {
-        name: 'redis-server',
-        value: 'redis-server',
-        checked: false
-      }, {
-        name: 'redis-client',
-        value: 'redis-client',
-        checked: false
       }]
     }];
 
@@ -101,9 +89,51 @@ module.exports = class extends Generator {
   }
 
   writing() {
+
+    // Copy chef files:
+    this.fs.copy(
+      this.templatePath('files/tmp/postgresql_user.sql'),
+      this.destinationPath('files/tmp/postgresql_user.sql')
+    );
+
+    this.fs.copyTpl(
+      this.templatePath('attributes/default.rb'),
+      this.destinationPath('attributes/default.rb'),
+      this.props
+    );
+
+    // Copy chef recipes:
+    this.fs.copy(
+      this.templatePath('recipes/setup-common.rb'),
+      this.destinationPath('recipes/setup-common.rb')
+    );
+
+    this.fs.copy(
+      this.templatePath('recipes/setup-nodejs.rb'),
+      this.destinationPath('recipes/setup-nodejs.rb')
+    );
+
+    this.fs.copy(
+      this.templatePath('recipes/setup-postgresql-server.rb'),
+      this.destinationPath('recipes/setup-postgresql-server.rb')
+    );
+
+    // Copy files that belong in the root folder:
     this.fs.copyTpl(
       this.templatePath('Vagrantfile'),
       this.destinationPath('Vagrantfile'),
+      this.props
+    );
+
+    this.fs.copyTpl(
+      this.templatePath('Berksfile'),
+      this.destinationPath('Berksfile'),
+      this.props
+    );
+
+    this.fs.copyTpl(
+      this.templatePath('metadata.rb'),
+      this.destinationPath('metadata.rb'),
       this.props
     );
   }
