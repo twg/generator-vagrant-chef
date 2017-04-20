@@ -89,11 +89,15 @@ module.exports = class extends Generator {
   }
 
   writing() {
-
     // Copy chef files:
     this.fs.copy(
       this.templatePath('files/tmp/postgresql_user.sql'),
       this.destinationPath('files/tmp/postgresql_user.sql')
+    );
+
+    this.fs.copy(
+      this.templatePath('files/etc/profile.d/prompt.sh.erb'),
+      this.destinationPath('files/etc/profile.d/prompt.sh.erb')
     );
 
     this.fs.copyTpl(
@@ -119,6 +123,17 @@ module.exports = class extends Generator {
     );
 
     // Copy files that belong in the root folder:
+    this.fs.copy(
+      this.templatePath('gitignore'),
+      this.destinationPath('.gitignore')
+    );
+
+    this.fs.copyTpl(
+      this.templatePath('README.md'),
+      this.destinationPath('README.md'),
+      this.props
+    );
+
     this.fs.copyTpl(
       this.templatePath('Vagrantfile'),
       this.destinationPath('Vagrantfile'),
@@ -132,7 +147,7 @@ module.exports = class extends Generator {
     );
 
     this.fs.copyTpl(
-      this.templatePath('metadata.rb'),
+      this.templatePath('metadata.rb.ejs'),
       this.destinationPath('metadata.rb'),
       this.props
     );
