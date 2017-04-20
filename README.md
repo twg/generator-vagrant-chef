@@ -25,7 +25,7 @@ yo vagrant-chef
 
 ## License
 
-Apache-2.0 © [David Pellerin]()
+Apache-2.0 © [TWG]()
 
 
 [npm-image]: https://badge.fury.io/js/generator-vagrant-chef.svg
