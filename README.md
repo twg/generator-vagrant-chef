@@ -4,6 +4,10 @@ Yeoman generator to generate Vagrant / Chef devops repos
 
 [![Build Status](https://travis-ci.com/twg/generator-vagrant-chef.svg?token=47zkRKuKsW563Uz7T5sm&branch=master)](https://travis-ci.com/twg/generator-vagrant-chef)
 
+## Screenshot
+
+![Screenshot](screenshot.gif)
+
 ## Testing
 
 ```bash
