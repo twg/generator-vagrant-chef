@@ -84,6 +84,14 @@ module.exports = class extends Generator {
         name: 'postgresql-client',
         value: 'postgresql-client',
         checked: false
+      }, {
+        name: 'redis-server',
+        value: 'redis-server',
+        checked: false
+      }, {
+        name: 'redis-client',
+        value: 'redis-client',
+        checked: false
       }]
     }];
 
@@ -137,6 +145,16 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath('recipes/setup-postgresql-client.rb'),
       this.destinationPath('recipes/setup-postgresql-client.rb')
+    );
+
+    this.fs.copy(
+      this.templatePath('recipes/setup-redis-server.rb'),
+      this.destinationPath('recipes/setup-redis-server.rb')
+    );
+
+    this.fs.copy(
+      this.templatePath('recipes/setup-redis-client.rb'),
+      this.destinationPath('recipes/setup-redis-client.rb')
     );
 
     // Copy files that belong in the root folder:
