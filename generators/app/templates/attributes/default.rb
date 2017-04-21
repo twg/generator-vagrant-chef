@@ -1,3 +1,5 @@
+node.default['common']['env'] = 'development'
+
 node.default['common']['deploy_user'] = 'deploy'
 node.default['common']['deploy_user_password'] = 'deploy'
 node.default['common']['deploy_group'] = 'deploy'
@@ -9,7 +11,7 @@ node.default['nodejs']['source']['checksum'] = 'b519cd616b0671ab789d2645c5c026de
 node.default['nodejs']['binary']['checksum'] = 'b519cd616b0671ab789d2645c5c026deb7e016d73a867ab4b1b8c9ceba9c3503'
 <% } %>
 
-<% if (VmSoftware.indexOf('postgresql') !== -1) { %>
+<% if (VmSoftware.indexOf('postgresql-server') !== -1) { %>
 node.default['postgresql']['version'] = '9.6'
 node.default['postgresql']['dir'] = '/etc/postgresql/9.6/main'
 node.default['postgresql']['config']['dynamic_shared_memory_type'] = 'sysv'

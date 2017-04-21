@@ -19,3 +19,21 @@ sudo node['common']['deploy_user'] do
   user node['common']['deploy_user']
   nopasswd true
 end
+
+template '/etc/environment' do
+  source 'etc/environment.erb'
+  variables(
+    environment: node['common']['env'])
+  action :create
+end
+
+template '/etc/profile.d/prompt.sh' do
+  source 'etc/profile.d/prompt.sh.erb'
+  action :create
+  mode '0644'
+  owner 'root'
+  group 'root'
+  backup 0
+end
+
+package 'python'

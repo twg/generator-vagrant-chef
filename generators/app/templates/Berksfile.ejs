@@ -12,7 +12,7 @@ cookbook 'yarn', '~> 0.3.0'
 cookbook 'nodejs', '~> 3.0.0'
 <% } %>
 
-<% if (VmSoftware.indexOf('postgresql') !== -1) { %>
+<% if (VmSoftware.indexOf('postgresql-client') !== -1 || VmSoftware.indexOf('postgresql-server') !== -1) { %>
 cookbook 'postgresql', '~> 6.1.1'
 <% } %>
 

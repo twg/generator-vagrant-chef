@@ -16,7 +16,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.run_list = []
     chef.run_list.push "<%= VmHostName %>::setup-common"
     <% if (VmSoftware.indexOf('nodejs') !== -1) { %>chef.run_list.push "<%= VmHostName %>::setup-nodejs"<% } %>
-    <% if (VmSoftware.indexOf('postgresql') !== -1) { %>chef.run_list.push "<%= VmHostName %>::setup-postgresql-server"<% } %>
+    <% if (VmSoftware.indexOf('postgresql-server') !== -1) { %>chef.run_list.push "<%= VmHostName %>::setup-postgresql-server"<% } %>
+    <% if (VmSoftware.indexOf('postgresql-client') !== -1) { %>chef.run_list.push "<%= VmHostName %>::setup-postgresql-client"<% } %>
     <% if (VmSoftware.indexOf('nginx') !== -1) { %>chef.run_list.push "<%= VmHostName %>::setup-nginx"<% } %>
     <% if (VmSoftware.indexOf('redis-server') !== -1) { %>chef.run_list.push "<%= VmHostName %>::setup-redis-server"<% } %>
     <% if (VmSoftware.indexOf('redis-client') !== -1) { %>chef.run_list.push "<%= VmHostName %>::setup-redis-client"<% } %>

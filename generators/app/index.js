@@ -77,9 +77,13 @@ module.exports = class extends Generator {
         value: 'nodejs',
         checked: true
       }, {
-        name: 'postgresql',
-        value: 'postgresql',
+        name: 'postgresql-server',
+        value: 'postgresql-server',
         checked: true
+      }, {
+        name: 'postgresql-client',
+        value: 'postgresql-client',
+        checked: false
       }]
     }];
 
@@ -95,11 +99,19 @@ module.exports = class extends Generator {
       this.destinationPath('files/tmp/postgresql_user.sql')
     );
 
-    this.fs.copy(
-      this.templatePath('files/etc/profile.d/prompt.sh.erb'),
-      this.destinationPath('files/etc/profile.d/prompt.sh.erb')
+    // Copy chef templates:
+    this.fs.copyTpl(
+      this.templatePath('templates/etc/environment.erb.ejs'),
+      this.destinationPath('templates/etc/environment.erb'),
+      this.props
     );
 
+    this.fs.copy(
+      this.templatePath('templates/etc/profile.d/prompt.sh.erb'),
+      this.destinationPath('templates/etc/profile.d/prompt.sh.erb')
+    );
+
+    // Copy chef attributes:
     this.fs.copyTpl(
       this.templatePath('attributes/default.rb'),
       this.destinationPath('attributes/default.rb'),
@@ -122,6 +134,11 @@ module.exports = class extends Generator {
       this.destinationPath('recipes/setup-postgresql-server.rb')
     );
 
+    this.fs.copy(
+      this.templatePath('recipes/setup-postgresql-client.rb'),
+      this.destinationPath('recipes/setup-postgresql-client.rb')
+    );
+
     // Copy files that belong in the root folder:
     this.fs.copy(
       this.templatePath('gitignore'),
@@ -129,19 +146,19 @@ module.exports = class extends Generator {
     );
 
     this.fs.copyTpl(
-      this.templatePath('_README.md'),
+      this.templatePath('_README.md.ejs'),
       this.destinationPath('README.md'),
       this.props
     );
 
     this.fs.copyTpl(
-      this.templatePath('Vagrantfile'),
+      this.templatePath('Vagrantfile.ejs'),
       this.destinationPath('Vagrantfile'),
       this.props
     );
 
     this.fs.copyTpl(
-      this.templatePath('Berksfile'),
+      this.templatePath('Berksfile.ejs'),
       this.destinationPath('Berksfile'),
       this.props
     );
@@ -151,6 +168,10 @@ module.exports = class extends Generator {
       this.destinationPath('metadata.rb'),
       this.props
     );
+  }
+
+  install() {
+    this.spawnCommand('berks', ['install']);
   }
 
 };
