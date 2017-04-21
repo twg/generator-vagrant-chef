@@ -1,5 +1,7 @@
 # generator-vagrant-chef
 
+![Screenshot](screenshot.gif)
+
 ## Testing
 
 ```bash
