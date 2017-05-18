@@ -102,10 +102,12 @@ module.exports = class extends Generator {
 
   writing() {
     // Copy chef files:
-    this.fs.copy(
-      this.templatePath('files/tmp/postgresql_user.sql'),
-      this.destinationPath('files/tmp/postgresql_user.sql')
-    );
+    if (this.props.VmSoftware && this.props.VmSoftware.indexOf('postgresql-server') !== -1) {
+      this.fs.copy(
+        this.templatePath('files/tmp/postgresql_user.sql'),
+        this.destinationPath('files/tmp/postgresql_user.sql')
+      );
+    }
 
     // Copy chef templates:
     this.fs.copyTpl(
@@ -132,30 +134,40 @@ module.exports = class extends Generator {
       this.destinationPath('recipes/setup-common.rb')
     );
 
-    this.fs.copy(
-      this.templatePath('recipes/setup-nodejs.rb'),
-      this.destinationPath('recipes/setup-nodejs.rb')
-    );
+    if (this.props.VmSoftware && this.props.VmSoftware.indexOf('nodejs') !== -1) {
+      this.fs.copy(
+        this.templatePath('recipes/setup-nodejs.rb'),
+        this.destinationPath('recipes/setup-nodejs.rb')
+      );
+    }
 
-    this.fs.copy(
-      this.templatePath('recipes/setup-postgresql-server.rb'),
-      this.destinationPath('recipes/setup-postgresql-server.rb')
-    );
+    if (this.props.VmSoftware && this.props.VmSoftware.indexOf('postgresql-server') !== -1) {
+      this.fs.copy(
+        this.templatePath('recipes/setup-postgresql-server.rb'),
+        this.destinationPath('recipes/setup-postgresql-server.rb')
+      );
+    }
 
-    this.fs.copy(
-      this.templatePath('recipes/setup-postgresql-client.rb'),
-      this.destinationPath('recipes/setup-postgresql-client.rb')
-    );
+    if (this.props.VmSoftware && this.props.VmSoftware.indexOf('postgresql-client') !== -1) {
+      this.fs.copy(
+        this.templatePath('recipes/setup-postgresql-client.rb'),
+        this.destinationPath('recipes/setup-postgresql-client.rb')
+      );
+    }
 
-    this.fs.copy(
-      this.templatePath('recipes/setup-redis-server.rb'),
-      this.destinationPath('recipes/setup-redis-server.rb')
-    );
+    if (this.props.VmSoftware && this.props.VmSoftware.indexOf('redis-server') !== -1) {
+      this.fs.copy(
+        this.templatePath('recipes/setup-redis-server.rb'),
+        this.destinationPath('recipes/setup-redis-server.rb')
+      );
+    }
 
-    this.fs.copy(
-      this.templatePath('recipes/setup-redis-client.rb'),
-      this.destinationPath('recipes/setup-redis-client.rb')
-    );
+    if (this.props.VmSoftware && this.props.VmSoftware.indexOf('redis-client') !== -1) {
+      this.fs.copy(
+        this.templatePath('recipes/setup-redis-client.rb'),
+        this.destinationPath('recipes/setup-redis-client.rb')
+      );
+    }
 
     // Copy files that belong in the root folder:
     this.fs.copy(
@@ -189,7 +201,9 @@ module.exports = class extends Generator {
   }
 
   install() {
-    this.spawnCommand('berks', ['install']);
+    if (!this.options['skip-install']) {
+      this.spawnCommand('berks', ['install']);
+    }
   }
 
 };
