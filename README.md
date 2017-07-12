@@ -8,6 +8,28 @@ Yeoman generator to generate Vagrant / Chef devops repos
 
 ![Screenshot](screenshot.gif)
 
+## Setup
+
+Ensure you have the `yo` CLI installed:
+
+```
+npm i yo -g
+```
+
+Make the `vagrant-chef` generator available on your system:
+
+```
+git clone git@github.com:twg/generator-vagrant-chef.git
+cd generator-vagrant-chef
+npm link
+```
+
+Use the generator:
+
+```
+yo vagrant-chef
+```
+
 ## Testing
 
 ```bash
