@@ -5,9 +5,9 @@ var helpers = require('yeoman-test');
 describe('vagrant-chef:app', function () {
   var getBaseFiles = function () {
     return [
-      'templates/etc/environment.erb',
-      'templates/etc/profile.d/prompt.sh.erb',
-      'attributes/default.rb',
+      'cookbooks/api_config/templates/etc/environment.erb',
+      'cookbooks/api_config/templates/etc/profile.d/prompt.sh.erb',
+      'cookbooks/api_config/attributes/default.rb',
       'Vagrantfile',
       'README.md',
       'Berksfile',
@@ -51,7 +51,7 @@ describe('vagrant-chef:app', function () {
 
     it('generates nodejs Chef recipe', function () {
       assert.file(getBaseFiles());
-      assert.file('recipes/setup-nodejs.rb');
+      assert.file('cookbooks/api_config/recipes/setup-nodejs.rb');
     });
 
     it('includes setup-nodejs in the Vagrantfile Chef runlist', function () {
@@ -71,8 +71,8 @@ describe('vagrant-chef:app', function () {
 
     it('generates postgresql-server chef recipe', function () {
       assert.file(getBaseFiles());
-      assert.file('recipes/setup-postgresql-server.rb');
-      assert.file('files/tmp/postgresql_user.sql');
+      assert.file('cookbooks/api_config/recipes/setup-postgresql-server.rb');
+      assert.file('cookbooks/api_config/files/tmp/postgresql_user.sql');
     });
 
     it('includes setup-postgresql-server in the Vagrantfile Chef runlist', function () {
@@ -92,8 +92,8 @@ describe('vagrant-chef:app', function () {
 
     it('generates postgresql-server and postgresql-client Chef recipes', function () {
       assert.file(getBaseFiles());
-      assert.file('recipes/setup-postgresql-server.rb');
-      assert.file('recipes/setup-postgresql-client.rb');
+      assert.file('cookbooks/api_config/recipes/setup-postgresql-server.rb');
+      assert.file('cookbooks/api_config/recipes/setup-postgresql-client.rb');
     });
 
     it('includes setup-postgresql-server and setup-postgersq-client in the Vagrantfile Chef runlist', function () {
@@ -114,7 +114,7 @@ describe('vagrant-chef:app', function () {
 
     it('generates redis-server Chef recipe', function () {
       assert.file(getBaseFiles());
-      assert.file('recipes/setup-redis-server.rb');
+      assert.file('cookbooks/api_config/recipes/setup-redis-server.rb');
     });
 
     it('includes setup-redis-server in the Vagrantfile Chef runlist', function () {
@@ -134,8 +134,8 @@ describe('vagrant-chef:app', function () {
 
     it('generates redis-server and redis-client Chef recipes', function () {
       assert.file(getBaseFiles());
-      assert.file('recipes/setup-redis-server.rb');
-      assert.file('recipes/setup-redis-client.rb');
+      assert.file('cookbooks/api_config/recipes/setup-redis-server.rb');
+      assert.file('cookbooks/api_config/recipes/setup-redis-client.rb');
     });
 
     it('includes setup-redis-server in the Vagrantfile Chef runlist', function () {

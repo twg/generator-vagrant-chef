@@ -1,0 +1,16 @@
+name '<%= VmHostName %>_config'
+
+depends 'sudo', '3.3.1'
+depends 'ssh_authorized_keys', '0.3.0'
+depends 'apt', '6.0.1'
+depends 'build-essential', '8.0.0'
+<% if (VmSoftware && VmSoftware.indexOf('nodejs') !== -1) { %>
+depends 'nodejs', '3.0.0'
+<% } %>
+depends 'yarn', '0.3.0'
+<% if (VmSoftware && VmSoftware.indexOf('postgresql-client') !== -1 || VmSoftware && VmSoftware.indexOf('postgresql-server') !== -1) { %>
+depends 'postgresql', '6.1.1'
+<% } %>
+depends 'application', '5.1.0'
+depends 'application_git', '1.1.0'
+depends 'poise-python', '1.5.1'
