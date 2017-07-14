@@ -100,72 +100,82 @@ module.exports = class extends Generator {
     });
   }
 
+  cookbookPath(path) {
+    return this.destinationPath(`cookbooks/${this.props.VmHostName}_config/${path}`);
+  }
+
   writing() {
     // Copy chef files:
     if (this.props.VmSoftware && this.props.VmSoftware.indexOf('postgresql-server') !== -1) {
       this.fs.copy(
         this.templatePath('files/tmp/postgresql_user.sql'),
-        this.destinationPath('files/tmp/postgresql_user.sql')
+        this.cookbookPath('files/tmp/postgresql_user.sql')
       );
     }
+
+    this.fs.copyTpl(
+      this.templatePath('cookbook_metadata.rb.ejs'),
+      this.cookbookPath('metadata.rb'),
+      this.props
+    );
 
     // Copy chef templates:
     this.fs.copyTpl(
       this.templatePath('templates/etc/environment.erb.ejs'),
-      this.destinationPath('templates/etc/environment.erb'),
+      this.cookbookPath('templates/etc/environment.erb'),
       this.props
     );
 
     this.fs.copy(
       this.templatePath('templates/etc/profile.d/prompt.sh.erb'),
-      this.destinationPath('templates/etc/profile.d/prompt.sh.erb')
+      this.cookbookPath('templates/etc/profile.d/prompt.sh.erb')
     );
 
     // Copy chef attributes:
     this.fs.copyTpl(
       this.templatePath('attributes/default.rb'),
-      this.destinationPath('attributes/default.rb'),
+      this.cookbookPath('attributes/default.rb'),
       this.props
     );
 
     // Copy chef recipes:
     this.fs.copy(
       this.templatePath('recipes/setup-common.rb'),
-      this.destinationPath('recipes/setup-common.rb')
+      this.cookbookPath('recipes/setup-common.rb')
     );
 
     if (this.props.VmSoftware && this.props.VmSoftware.indexOf('nodejs') !== -1) {
       this.fs.copy(
         this.templatePath('recipes/setup-nodejs.rb'),
-        this.destinationPath('recipes/setup-nodejs.rb')
+        this.cookbookPath('recipes/setup-nodejs.rb')
       );
     }
 
     if (this.props.VmSoftware && this.props.VmSoftware.indexOf('postgresql-server') !== -1) {
       this.fs.copy(
         this.templatePath('recipes/setup-postgresql-server.rb'),
-        this.destinationPath('recipes/setup-postgresql-server.rb')
+        this.cookbookPath('recipes/setup-postgresql-server.rb')
       );
     }
 
     if (this.props.VmSoftware && this.props.VmSoftware.indexOf('postgresql-client') !== -1) {
       this.fs.copy(
         this.templatePath('recipes/setup-postgresql-client.rb'),
-        this.destinationPath('recipes/setup-postgresql-client.rb')
+        this.cookbookPath('recipes/setup-postgresql-client.rb')
       );
     }
 
     if (this.props.VmSoftware && this.props.VmSoftware.indexOf('redis-server') !== -1) {
       this.fs.copy(
         this.templatePath('recipes/setup-redis-server.rb'),
-        this.destinationPath('recipes/setup-redis-server.rb')
+        this.cookbookPath('recipes/setup-redis-server.rb')
       );
     }
 
     if (this.props.VmSoftware && this.props.VmSoftware.indexOf('redis-client') !== -1) {
       this.fs.copy(
         this.templatePath('recipes/setup-redis-client.rb'),
-        this.destinationPath('recipes/setup-redis-client.rb')
+        this.cookbookPath('recipes/setup-redis-client.rb')
       );
     }
 
