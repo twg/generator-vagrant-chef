@@ -6,10 +6,13 @@ cookbook 'sudo', '~> 3.3.1'
 cookbook 'ssh_authorized_keys', '~> 0.3.0'
 cookbook 'apt', '~> 6.0.1'
 cookbook 'build-essential', '~> 8.0.0'
-cookbook 'yarn', '~> 0.3.0'
 
 <% if (VmSoftware && VmSoftware.indexOf('nodejs') !== -1) { %>
 cookbook 'nodejs', '~> 3.0.0'
+<% } %>
+
+<% if (VmSoftware && VmSoftware.indexOf('yarn') !== -1) { %>
+cookbook 'yarn', '~> 0.3.0'
 <% } %>
 
 <% if (VmSoftware && VmSoftware.indexOf('postgresql-client') !== -1 || VmSoftware && VmSoftware.indexOf('postgresql-server') !== -1) { %>
