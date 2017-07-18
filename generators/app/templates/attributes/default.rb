@@ -6,9 +6,9 @@ node.default['common']['deploy_group'] = 'deploy'
 node.default['common']['deploy_user_home'] = '/home/deploy'
 
 <% if (VmSoftware && VmSoftware.indexOf('nodejs') !== -1) { %>
-node.default['nodejs']['version'] = '6.10.2'
-node.default['nodejs']['source']['checksum'] = 'b519cd616b0671ab789d2645c5c026deb7e016d73a867ab4b1b8c9ceba9c3503'
-node.default['nodejs']['binary']['checksum'] = 'b519cd616b0671ab789d2645c5c026deb7e016d73a867ab4b1b8c9ceba9c3503'
+node.default['nodejs']['version'] = '6.11.1'
+node.default['nodejs']['source']['checksum'] = 'e68cc956f0ca5c54e7f3016d639baf987f6f9de688bb7b31339ab7561af88f41'
+node.default['nodejs']['binary']['checksum'] = 'e68cc956f0ca5c54e7f3016d639baf987f6f9de688bb7b31339ab7561af88f41'
 <% } %>
 
 <% if (VmSoftware && VmSoftware.indexOf('postgresql-server') !== -1) { %>
