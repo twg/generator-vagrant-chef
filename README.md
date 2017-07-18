@@ -40,6 +40,9 @@ This generator supports the following technologies:
 - PostgreSQL
 - Redis
 
+Don't see a technology you need? [Please let us know!](https://github.com/twg/generator-vagrant-chef/issues/new)
+
+
 ## Testing
 
 ```bash
