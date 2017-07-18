@@ -7,7 +7,9 @@ depends 'build-essential', '~> 8.0.0'
 <% if (VmSoftware && VmSoftware.indexOf('nodejs') !== -1) { %>
 depends 'nodejs', '~> 3.0.0'
 <% } %>
+<% if (VmSoftware && VmSoftware.indexOf('yarn') !== -1) { %>
 depends 'yarn', '~> 0.3.0'
+<% } %>
 <% if (VmSoftware && VmSoftware.indexOf('postgresql-client') !== -1 || VmSoftware && VmSoftware.indexOf('postgresql-server') !== -1) { %>
 depends 'postgresql', '~> 6.1.1'
 <% } %>

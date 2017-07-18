@@ -59,6 +59,26 @@ describe('vagrant-chef:app', function () {
     });
   });
 
+  describe('yarn', function () {
+    beforeEach(function (done) {
+      var prompts = getBasePrompt();
+      prompts.VmSoftware = 'yarn';
+      this.app = helpers
+        .run(require.resolve('../generators/app'))
+        .withPrompts(prompts)
+        .on('end', done);
+    });
+
+    it('generates yarn Chef recipe', function () {
+      assert.file(getBaseFiles());
+      assert.file('cookbooks/api_config/recipes/setup-yarn.rb');
+    });
+
+    it('includes setup-yarn in the Vagrantfile Chef runlist', function () {
+      assert.fileContent('Vagrantfile', /setup-yarn/);
+    });
+  });
+
   describe('postgresql-server', function () {
     beforeEach(function (done) {
       var prompts = getBasePrompt();

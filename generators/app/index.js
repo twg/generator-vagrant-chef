@@ -77,6 +77,10 @@ module.exports = class extends Generator {
         value: 'nodejs',
         checked: true
       }, {
+        name: 'yarn',
+        value: 'yarn',
+        checked: false
+      }, {
         name: 'postgresql-server',
         value: 'postgresql-server',
         checked: true
@@ -148,6 +152,13 @@ module.exports = class extends Generator {
       this.fs.copy(
         this.templatePath('recipes/setup-nodejs.rb'),
         this.cookbookPath('recipes/setup-nodejs.rb')
+      );
+    }
+
+    if (this.props.VmSoftware && this.props.VmSoftware.indexOf('yarn') !== -1) {
+      this.fs.copy(
+        this.templatePath('recipes/setup-yarn.rb'),
+        this.cookbookPath('recipes/setup-yarn.rb')
       );
     }
 
