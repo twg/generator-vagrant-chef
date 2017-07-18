@@ -30,6 +30,15 @@ Use the generator:
 yo vagrant-chef
 ```
 
+## Software
+
+This generator supports the following technologies:
+
+- Nginx
+- Node.JS
+- PostgreSQL
+- Redis
+
 ## Testing
 
 ```bash
