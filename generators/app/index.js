@@ -219,6 +219,11 @@ module.exports = class extends Generator {
       this.destinationPath('metadata.rb'),
       this.props
     );
+
+    this.fs.copy(
+      this.templatePath('upload_cookbooks'),
+      this.destinationPath('upload_cookbooks')
+    );
   }
 
   install() {
