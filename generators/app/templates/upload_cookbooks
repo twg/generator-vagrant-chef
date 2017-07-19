@@ -1,0 +1,70 @@
+#!/bin/bash
+
+# check for dependencies:
+command -v dialog >/dev/null 2>&1 || { echo >&2 "I require dialog but it's not installed. brew install dialog"; exit 1; }
+command -v aws >/dev/null 2>&1 || { echo >&2 "I require aws but it's not installed. brew install awscli"; exit 1; }
+command -v berks >/dev/null 2>&1 || { echo >&2 "I require berks but it's not installed. https://downloads.chef.io/chef-dk/"; exit 1; }
+
+# check for an aws credentials file:
+if [ ! -f ~/.aws/credentials ]; then
+  echo "AWS credentials file not found. run: 'aws configure' to setup your credentials"
+  exit 1
+fi
+
+# source the dotfile if it exists:
+source .deployrc
+
+# ask the user which AWS profile to use:
+MENU_OPTIONS=
+COUNT=0
+aws_profiles=($(cat ~/.aws/credentials | grep "\\[" | tr -d '[]'))
+profile_position=""
+
+# find out which index the previously selected profile lives at:
+for i in "${!aws_profiles[@]}"; do
+  if [[ "${aws_profiles[$i]}" = "${profile}" ]]; then
+    profile_position=$i
+    ((profile_position++))
+  fi
+done
+
+# create a string containing all of the menu items:
+for j in `cat ~/.aws/credentials | grep "\\[" | tr -d '[]'`
+do
+  COUNT=$[COUNT+1]
+  MENU_OPTIONS="${MENU_OPTIONS} ${COUNT} $j "
+done
+
+# ask the user which AWS Profile to use for the upload:
+cmd=(dialog --backtitle "Deploying Chef Cookbooks to Amazon S3" --default-item "$profile_position" --menu "Select an AWS profile:" 22 76 16)
+options=(${MENU_OPTIONS})
+selected_profile=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+
+# if the user hit Cancel, then exit:
+if [ -z "$selected_profile" ]
+  then
+    exit 0
+fi
+
+# ask the user which bucket to use and use the previously selected bucket name as a default:
+bucket=$(dialog --inputbox "Enter the S3 bucket to use:" 8 40 $bucket 2>&1 >/dev/tty)
+
+# if the user hit Cancel, then exit:
+if [ -z "$bucket" ]
+  then
+    exit 0
+fi
+
+# save defaults to a dotfile
+cat <<EOF > .deployrc
+profile=${aws_profiles[$selected_profile-1]}
+bucket=${bucket}
+EOF
+
+# package up the cookbook:
+rm -f cookbooks.tar.gz
+berks install
+berks package cookbooks.tar.gz
+
+# copy the file to S3 using the selected AWS profile:
+aws --profile "${aws_profiles[$selected_profile-1]}" s3 cp cookbooks.tar.gz s3://${bucket}/deploy/cookbooks.tar.gz

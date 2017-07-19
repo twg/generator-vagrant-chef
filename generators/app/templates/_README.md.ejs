@@ -1,1 +1,20 @@
 # <%= VmHostName %>
+
+
+## Uploading your Chef cookbooks to Amazon S3:
+
+You'll need the following applications on your system:
+
+* awscli (macOS: brew install awscli)
+* dialog (macOS: brew install dialog)
+* berks (https://downloads.chef.io/chef-dk/)
+
+Once you have those depdencies installed, you can run:
+
+```
+$ ./upload_cookbooks
+```
+
+Follow the on-screen prompts, and it will package your Chef cookbooks using `berks`, and then upload them to the specified Amazon S3 bucket.
+
+Your configuration will be stored in `.deployrc` which does not contain any sensitive information such as AWS secret keys.
