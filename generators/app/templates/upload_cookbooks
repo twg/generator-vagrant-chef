@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# check for dialog
+command -v dialog >/dev/null 2>&1 || { echo >&2 "I require dialog but it's not installed. brew install dialog"; exit 1; }
+
 # source the dotfile if it exists:
 source .deployrc
 
