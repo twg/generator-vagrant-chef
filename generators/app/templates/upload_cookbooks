@@ -55,6 +55,5 @@ rm -f cookbooks.tar.gz
 berks install
 berks package cookbooks.tar.gz
 
-
 # copy the file to S3 using the selected AWS profile:
 aws --profile "${aws_profiles[$selected_profile-1]}" s3 cp cookbooks.tar.gz s3://${bucket}/deploy/cookbooks.tar.gz
