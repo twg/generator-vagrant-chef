@@ -1,7 +1,14 @@
 #!/bin/bash
 
-# check for dialog
+# check for dependencies:
 command -v dialog >/dev/null 2>&1 || { echo >&2 "I require dialog but it's not installed. brew install dialog"; exit 1; }
+command -v aws >/dev/null 2>&1 || { echo >&2 "I require aws but it's not installed. brew install awscli"; exit 1; }
+
+# check for an aws credentials file:
+if [ ! -f ~/.aws/credentials ]; then
+  echo "AWS credentials file not found. run: 'aws configure' to setup your credentials"
+  exit 1
+fi
 
 # source the dotfile if it exists:
 source .deployrc
