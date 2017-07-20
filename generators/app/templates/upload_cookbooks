@@ -22,7 +22,7 @@ profile_position=""
 
 # find out which index the previously selected profile lives at:
 for i in "${!aws_profiles[@]}"; do
-  if [[ "${aws_profiles[$i]}" = "${profile}" ]]; then
+  if [[ "${aws_profiles[$i]}" == "${profile}" ]]; then
     profile_position=$i
     ((profile_position++))
   fi
@@ -31,7 +31,7 @@ done
 # create a string containing all of the menu items:
 for j in `cat ~/.aws/credentials | grep "\\[" | tr -d '[]'`
 do
-  COUNT=$[COUNT+1]
+  COUNT=$((COUNT+1))
   MENU_OPTIONS="${MENU_OPTIONS} ${COUNT} $j "
 done
 
@@ -47,7 +47,7 @@ if [ -z "$selected_profile" ]
 fi
 
 # ask the user which bucket to use and use the previously selected bucket name as a default:
-bucket=$(dialog --inputbox "Enter the S3 bucket to use:" 8 40 $bucket 2>&1 >/dev/tty)
+bucket=$(dialog --inputbox "Enter the S3 bucket to use:" 8 40 "$bucket" 2>&1 >/dev/tty)
 
 # if the user hit Cancel, then exit:
 if [ -z "$bucket" ]
@@ -67,4 +67,4 @@ berks install
 berks package cookbooks.tar.gz
 
 # copy the file to S3 using the selected AWS profile:
-aws --profile "${aws_profiles[$selected_profile-1]}" s3 cp cookbooks.tar.gz s3://${bucket}/deploy/cookbooks.tar.gz
+aws --profile "${aws_profiles[$selected_profile-1]}" s3 cp cookbooks.tar.gz s3://"${bucket}"/deploy/cookbooks.tar.gz
