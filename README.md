@@ -49,6 +49,13 @@ Don't see a technology you need? [Please let us know!](https://github.com/twg/ge
 npm test
 ```
 
+## Deploying Cookbooks to S3
+
+This generator includes a script which allows you to easily package and upload your Chef cookbooks to Amazon S3.
+
+![Screenshot](screenshot2.gif)
+
+
 ## Getting To Know Yeoman
 
  * Yeoman has a heart of gold.
