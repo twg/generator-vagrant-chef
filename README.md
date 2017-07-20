@@ -49,16 +49,6 @@ Don't see a technology you need? [Please let us know!](https://github.com/twg/ge
 npm test
 ```
 
-## Developing & Testing Yeoman Locally
-
- * Fork this repository.
- * https://stackoverflow.com/questions/24037761/testing-yeoman-generator-locally
-
-```bash
-npm link
-yo vagrant-chef
-```
-
 ## Getting To Know Yeoman
 
  * Yeoman has a heart of gold.
