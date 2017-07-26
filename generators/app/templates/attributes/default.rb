@@ -19,4 +19,11 @@ node.default['postgresql']['password']['postgres'] = 'deploy'
 node.default['postgresql']['client']['packages'] = ['postgresql-client-9.6', 'libpq-dev']
 node.default['postgresql']['server']['packages'] = ['postgresql-9.6']
 node.default['postgresql']['contrib']['packages'] = ['postgresql-contrib-9.6']
+node.default['postgresql']['pg_hba'] = [
+  { type: 'local', db: 'all', user: 'all', addr: nil, method: 'trust' },
+  { type: 'host', db: 'all', user: 'all', addr: '127.0.0.1/32', method: 'trust' },
+  { type: 'host', db: 'all', user: 'all', addr: '::1/128', method: 'trust' },
+  { type: 'host', db: 'all', user: 'vagrant', addr: 'all', method: 'password' },
+  { type: 'host', db: 'all', user: 'postgres', addr: 'all', method: 'trust' }
+]
 <% } %>
