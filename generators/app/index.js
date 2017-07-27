@@ -81,6 +81,10 @@ module.exports = class extends Generator {
         value: 'yarn',
         checked: false
       }, {
+        name: 'elixir',
+        value: 'elixir',
+        checked: false
+      }, {
         name: 'postgresql-server',
         value: 'postgresql-server',
         checked: true
@@ -159,6 +163,13 @@ module.exports = class extends Generator {
       this.fs.copy(
         this.templatePath('recipes/setup-yarn.rb'),
         this.cookbookPath('recipes/setup-yarn.rb')
+      );
+    }
+
+    if (this.props.VmSoftware && this.props.VmSoftware.indexOf('elixir') !== -1) {
+      this.fs.copy(
+        this.templatePath('recipes/setup-elixir.rb'),
+        this.cookbookPath('recipes/setup-elixir.rb')
       );
     }
 

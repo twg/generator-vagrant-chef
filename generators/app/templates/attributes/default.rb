@@ -27,3 +27,7 @@ node.default['postgresql']['pg_hba'] = [
   { type: 'host', db: 'all', user: 'postgres', addr: 'all', method: 'trust' }
 ]
 <% } %>
+
+<% if (VmSoftware && VmSoftware.indexOf('elixir') !== -1) { %>
+node.default['elixir']['version'] = '1.4.2'
+<% } %>
