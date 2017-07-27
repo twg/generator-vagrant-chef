@@ -37,6 +37,7 @@ This generator supports the following technologies:
 - Nginx
 - Node.JS
 - Yarn
+- Elixir
 - PostgreSQL
 - Redis
 
