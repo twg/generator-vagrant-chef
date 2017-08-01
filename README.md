@@ -38,6 +38,8 @@ This generator supports the following technologies:
 - Node.JS
 - Yarn
 - Elixir
+- Python
+- Pip
 - PostgreSQL
 - Redis
 

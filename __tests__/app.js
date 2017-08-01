@@ -99,6 +99,46 @@ describe('vagrant-chef:app', function () {
     });
   });
 
+  describe('python', function () {
+    beforeEach(function (done) {
+      var prompts = getBasePrompt();
+      prompts.VmSoftware = 'python';
+      this.app = helpers
+        .run(require.resolve('../generators/app'))
+        .withPrompts(prompts)
+        .on('end', done);
+    });
+
+    it('generates python Chef recipe', function () {
+      assert.file(getBaseFiles());
+      assert.file('cookbooks/api_config/recipes/setup-python.rb');
+    });
+
+    it('includes setup-python in the Vagrantfile Chef runlist', function () {
+      assert.fileContent('Vagrantfile', /setup-python/);
+    });
+  });
+
+  describe('pip', function () {
+    beforeEach(function (done) {
+      var prompts = getBasePrompt();
+      prompts.VmSoftware = 'pip';
+      this.app = helpers
+        .run(require.resolve('../generators/app'))
+        .withPrompts(prompts)
+        .on('end', done);
+    });
+
+    it('generates pip Chef recipe', function () {
+      assert.file(getBaseFiles());
+      assert.file('cookbooks/api_config/recipes/setup-pip.rb');
+    });
+
+    it('includes setup-pip in the Vagrantfile Chef runlist', function () {
+      assert.fileContent('Vagrantfile', /setup-pip/);
+    });
+  });
+
   describe('postgresql-server', function () {
     beforeEach(function (done) {
       var prompts = getBasePrompt();

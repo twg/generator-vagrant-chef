@@ -21,6 +21,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     <% if (VmSoftware && VmSoftware.indexOf('nodejs') !== -1) { %>chef.run_list.push "<%= VmHostName %>_config::setup-nodejs"<% } %>
     <% if (VmSoftware && VmSoftware.indexOf('yarn') !== -1) { %>chef.run_list.push "<%= VmHostName %>_config::setup-yarn"<% } %>
     <% if (VmSoftware && VmSoftware.indexOf('elixir') !== -1) { %>chef.run_list.push "<%= VmHostName %>_config::setup-elixir"<% } %>
+    <% if (VmSoftware && VmSoftware.indexOf('python') !== -1) { %>chef.run_list.push "<%= VmHostName %>_config::setup-python"<% } %>
+    <% if (VmSoftware && VmSoftware.indexOf('pip') !== -1) { %>chef.run_list.push "<%= VmHostName %>_config::setup-pip"<% } %>
     <% if (VmSoftware && VmSoftware.indexOf('postgresql-server') !== -1) { %>chef.run_list.push "<%= VmHostName %>_config::setup-postgresql-server"<% } %>
     <% if (VmSoftware && VmSoftware.indexOf('postgresql-client') !== -1) { %>chef.run_list.push "<%= VmHostName %>_config::setup-postgresql-client"<% } %>
     <% if (VmSoftware && VmSoftware.indexOf('nginx') !== -1) { %>chef.run_list.push "<%= VmHostName %>_config::setup-nginx"<% } %>

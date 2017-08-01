@@ -85,6 +85,14 @@ module.exports = class extends Generator {
         value: 'elixir',
         checked: false
       }, {
+        name: 'python',
+        value: 'python',
+        checked: true
+      }, {
+        name: 'pip',
+        value: 'pip',
+        checked: true
+      }, {
         name: 'postgresql-server',
         value: 'postgresql-server',
         checked: true
@@ -170,6 +178,20 @@ module.exports = class extends Generator {
       this.fs.copy(
         this.templatePath('recipes/setup-elixir.rb'),
         this.cookbookPath('recipes/setup-elixir.rb')
+      );
+    }
+
+    if (this.props.VmSoftware && this.props.VmSoftware.indexOf('python') !== -1) {
+      this.fs.copy(
+        this.templatePath('recipes/setup-python.rb'),
+        this.cookbookPath('recipes/setup-python.rb')
+      );
+    }
+
+    if (this.props.VmSoftware && this.props.VmSoftware.indexOf('pip') !== -1) {
+      this.fs.copy(
+        this.templatePath('recipes/setup-pip.rb'),
+        this.cookbookPath('recipes/setup-pip.rb')
       );
     }
 

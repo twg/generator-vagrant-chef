@@ -35,5 +35,3 @@ template '/etc/profile.d/prompt.sh' do
   group 'root'
   backup 0
 end
-
-package 'python'
