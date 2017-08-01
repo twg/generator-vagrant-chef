@@ -39,6 +39,26 @@ describe('vagrant-chef:app', function () {
     });
   });
 
+  describe('nginx', function () {
+    beforeEach(function (done) {
+      var prompts = getBasePrompt();
+      prompts.VmSoftware = 'nginx';
+      this.app = helpers
+        .run(require.resolve('../generators/app'))
+        .withPrompts(prompts)
+        .on('end', done);
+    });
+
+    it('generates nginx Chef recipe', function () {
+      assert.file(getBaseFiles());
+      assert.file('cookbooks/api_config/recipes/setup-nginx.rb');
+    });
+
+    it('includes setup-nginx in the Vagrantfile Chef runlist', function () {
+      assert.fileContent('Vagrantfile', /setup-nginx/);
+    });
+  });
+
   describe('nodejs', function () {
     beforeEach(function (done) {
       var prompts = getBasePrompt();

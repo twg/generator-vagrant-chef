@@ -1,3 +1,5 @@
+package ['apt', 'build-essential', 'unzip', 'curl', 'git', 'language-pack-en']
+
 group node['common']['deploy_group']
 
 user node['common']['deploy_user'] do

@@ -73,9 +73,13 @@ module.exports = class extends Generator {
       name: 'VmSoftware',
       message: 'Select software to provision with Chef',
       choices: [{
+        name: 'nginx',
+        value: 'nginx',
+        checked: false
+      }, {
         name: 'nodejs',
         value: 'nodejs',
-        checked: true
+        checked: false
       }, {
         name: 'yarn',
         value: 'yarn',
@@ -87,15 +91,15 @@ module.exports = class extends Generator {
       }, {
         name: 'python',
         value: 'python',
-        checked: true
+        checked: false
       }, {
         name: 'pip',
         value: 'pip',
-        checked: true
+        checked: false
       }, {
         name: 'postgresql-server',
         value: 'postgresql-server',
-        checked: true
+        checked: false
       }, {
         name: 'postgresql-client',
         value: 'postgresql-client',
@@ -147,6 +151,13 @@ module.exports = class extends Generator {
       this.cookbookPath('templates/etc/profile.d/prompt.sh.erb')
     );
 
+    if (this.props.VmSoftware && this.props.VmSoftware.indexOf('nginx') !== -1) {
+      this.fs.copy(
+        this.templatePath('templates/etc/nginx/sites-enabled/default.erb'),
+        this.cookbookPath('templates/etc/nginx/sites-enabled/default.erb')
+      );
+    }
+
     // Copy chef attributes:
     this.fs.copyTpl(
       this.templatePath('attributes/default.rb'),
@@ -159,6 +170,13 @@ module.exports = class extends Generator {
       this.templatePath('recipes/setup-common.rb'),
       this.cookbookPath('recipes/setup-common.rb')
     );
+
+    if (this.props.VmSoftware && this.props.VmSoftware.indexOf('nginx') !== -1) {
+      this.fs.copy(
+        this.templatePath('recipes/setup-nginx.rb'),
+        this.cookbookPath('recipes/setup-nginx.rb')
+      );
+    }
 
     if (this.props.VmSoftware && this.props.VmSoftware.indexOf('nodejs') !== -1) {
       this.fs.copy(
