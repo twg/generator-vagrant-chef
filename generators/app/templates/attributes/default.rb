@@ -5,6 +5,10 @@ node.default['common']['deploy_user_password'] = 'deploy'
 node.default['common']['deploy_group'] = 'deploy'
 node.default['common']['deploy_user_home'] = '/home/deploy'
 
+<% if (VmSoftware && VmSoftware.indexOf('ruby') !== -1) { %>
+node.default['common']['ruby_version'] = '2.2.2'
+<% } %>
+
 <% if (VmSoftware && VmSoftware.indexOf('nodejs') !== -1) { %>
 node.default['nodejs']['version'] = '6.11.1'
 node.default['nodejs']['source']['checksum'] = 'e68cc956f0ca5c54e7f3016d639baf987f6f9de688bb7b31339ab7561af88f41'

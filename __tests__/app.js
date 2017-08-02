@@ -39,6 +39,26 @@ describe('vagrant-chef:app', function () {
     });
   });
 
+  describe('ruby', function () {
+    beforeEach(function (done) {
+      var prompts = getBasePrompt();
+      prompts.VmSoftware = 'ruby';
+      this.app = helpers
+        .run(require.resolve('../generators/app'))
+        .withPrompts(prompts)
+        .on('end', done);
+    });
+
+    it('generates ruby Chef recipe', function () {
+      assert.file(getBaseFiles());
+      assert.file('cookbooks/api_config/recipes/setup-ruby.rb');
+    });
+
+    it('includes setup-ruby in the Vagrantfile Chef runlist', function () {
+      assert.fileContent('Vagrantfile', /setup-ruby/);
+    });
+  });
+
   describe('nginx', function () {
     beforeEach(function (done) {
       var prompts = getBasePrompt();

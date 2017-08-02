@@ -81,6 +81,10 @@ module.exports = class extends Generator {
         value: 'nodejs',
         checked: false
       }, {
+        name: 'ruby',
+        value: 'ruby',
+        checked: false
+      }, {
         name: 'yarn',
         value: 'yarn',
         checked: false
@@ -175,6 +179,13 @@ module.exports = class extends Generator {
       this.fs.copy(
         this.templatePath('recipes/setup-nginx.rb'),
         this.cookbookPath('recipes/setup-nginx.rb')
+      );
+    }
+
+    if (this.props.VmSoftware && this.props.VmSoftware.indexOf('ruby') !== -1) {
+      this.fs.copy(
+        this.templatePath('recipes/setup-ruby.rb'),
+        this.cookbookPath('recipes/setup-ruby.rb')
       );
     }
 
