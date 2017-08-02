@@ -42,6 +42,7 @@ This generator supports the following technologies:
 - Pip
 - PostgreSQL
 - Redis
+- Ruby
 
 Don't see a technology you need? [Please let us know!](https://github.com/twg/generator-vagrant-chef/issues/new)
 
