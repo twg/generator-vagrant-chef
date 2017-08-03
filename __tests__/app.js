@@ -59,6 +59,26 @@ describe('vagrant-chef:app', function () {
     });
   });
 
+  describe('passenger', function () {
+    beforeEach(function (done) {
+      var prompts = getBasePrompt();
+      prompts.VmSoftware = 'passenger';
+      this.app = helpers
+        .run(require.resolve('../generators/app'))
+        .withPrompts(prompts)
+        .on('end', done);
+    });
+
+    it('generates nginx-passenger Chef recipe', function () {
+      assert.file(getBaseFiles());
+      assert.file('cookbooks/api_config/recipes/setup-nginx-passenger.rb');
+    });
+
+    it('includes simple_passenger::default in the Vagrantfile Chef runlist', function () {
+      assert.fileContent('Vagrantfile', /setup-nginx-passenger/);
+    });
+  });
+
   describe('nginx', function () {
     beforeEach(function (done) {
       var prompts = getBasePrompt();

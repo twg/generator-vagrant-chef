@@ -20,6 +20,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.run_list = []
     chef.run_list.push "<%= VmHostName %>_config::setup-common"
     <% if (VmSoftware && VmSoftware.indexOf('ruby') !== -1) { %>chef.run_list.push "<%= VmHostName %>_config::setup-ruby"<% } %>
+    <% if (VmSoftware && VmSoftware.indexOf('passenger') !== -1) { %>chef.run_list.push "<%= VmHostName %>_config::setup-nginx-passenger"<% } %>
     <% if (VmSoftware && VmSoftware.indexOf('nodejs') !== -1) { %>chef.run_list.push "<%= VmHostName %>_config::setup-nodejs"<% } %>
     <% if (VmSoftware && VmSoftware.indexOf('yarn') !== -1) { %>chef.run_list.push "<%= VmHostName %>_config::setup-yarn"<% } %>
     <% if (VmSoftware && VmSoftware.indexOf('elixir') !== -1) { %>chef.run_list.push "<%= VmHostName %>_config::setup-elixir"<% } %>

@@ -6,7 +6,7 @@ node.default['common']['deploy_group'] = 'deploy'
 node.default['common']['deploy_user_home'] = '/home/deploy'
 
 <% if (VmSoftware && VmSoftware.indexOf('ruby') !== -1) { %>
-node.default['common']['ruby_version'] = '2.2.2'
+node.default['common']['ruby_version'] = '2.2'
 <% } %>
 
 <% if (VmSoftware && VmSoftware.indexOf('nodejs') !== -1) { %>

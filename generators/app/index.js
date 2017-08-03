@@ -73,16 +73,20 @@ module.exports = class extends Generator {
       name: 'VmSoftware',
       message: 'Select software to provision with Chef',
       choices: [{
-        name: 'nginx',
+        name: 'nginx (standalone)',
         value: 'nginx',
         checked: false
       }, {
-        name: 'nodejs',
+        name: 'nodejs + npm',
         value: 'nodejs',
         checked: false
       }, {
-        name: 'ruby',
+        name: 'ruby + bundler',
         value: 'ruby',
+        checked: false
+      }, {
+        name: 'nginx + passenger',
+        value: 'passenger',
         checked: false
       }, {
         name: 'yarn',
@@ -179,6 +183,13 @@ module.exports = class extends Generator {
       this.fs.copy(
         this.templatePath('recipes/setup-nginx.rb'),
         this.cookbookPath('recipes/setup-nginx.rb')
+      );
+    }
+
+    if (this.props.VmSoftware && this.props.VmSoftware.indexOf('passenger') !== -1) {
+      this.fs.copy(
+        this.templatePath('recipes/setup-nginx-passenger.rb'),
+        this.cookbookPath('recipes/setup-nginx-passenger.rb')
       );
     }
 
