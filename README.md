@@ -35,6 +35,7 @@ yo vagrant-chef
 This generator supports the following technologies:
 
 - Nginx
+- Nginx + Passenger
 - Node.JS
 - Yarn
 - Elixir
