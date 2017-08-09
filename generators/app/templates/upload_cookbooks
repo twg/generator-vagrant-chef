@@ -62,6 +62,7 @@ bucket=${bucket}
 EOF
 
 # package up the cookbook:
+clear
 rm -f cookbooks.tar.gz
 berks install
 berks package cookbooks.tar.gz
