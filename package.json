@@ -1,8 +1,8 @@
 {
   "name": "generator-vagrant-chef",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Yeoman generator that uses Vagrant to set up a Ubuntu box, provisioned with Chef. It also makes it easy to publish cookbooks to AWS for use with OpsWorks.",
-  "homepage": "",
+  "homepage": "https://github.com/twg/generator-vagrant-chef",
   "author": {
     "name": "David Pellerin",
     "email": "david@davidpellerin.com",
@@ -15,6 +15,9 @@
   "keywords": [
     "yeoman-generator"
   ],
+  "bugs": {
+    "url": "https://github.com/twg/generator-vagrant-chef/issues"
+  },
   "devDependencies": {
     "yeoman-test": "^1.6.0",
     "yeoman-assert": "^3.0.0",
@@ -45,6 +48,9 @@
       "node": true
     }
   },
-  "repository": "/generator-vagrant-chef",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:twg/generator-vagrant-chef.git"
+  },
   "license": "MIT"
 }
