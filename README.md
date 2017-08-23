@@ -71,7 +71,7 @@ This generator includes a script which allows you to easily package and upload y
 
 ## License
 
-Apache-2.0 © [TWG]()
+MIT © [TWG](https://twg.io)
 
 
 [npm-image]: https://badge.fury.io/js/generator-vagrant-chef.svg
