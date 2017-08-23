@@ -21,6 +21,7 @@ Make the `vagrant-chef` generator available on your system:
 ```
 git clone git@github.com:twg/generator-vagrant-chef.git
 cd generator-vagrant-chef
+npm install
 npm link
 ```
 
