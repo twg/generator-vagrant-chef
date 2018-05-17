@@ -52,5 +52,6 @@
     "type": "git",
     "url": "git+ssh://git@github.com:twg/generator-vagrant-chef.git"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "false": {}
 }
